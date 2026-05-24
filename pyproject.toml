@@ -147,11 +147,11 @@ ci = [
 # URLs
 # ------------------------------------------------------------------------------
 [project.urls]
-Homepage      = "https://github.com/Koffi-Fredysessie/AfriMarkets-python"
-Documentation = "https://github.com/Koffi-Fredysessie/AfriMarkets-python#readme"
-Repository    = "https://github.com/Koffi-Fredysessie/AfriMarkets-python"
-"Bug Tracker" = "https://github.com/Koffi-Fredysessie/AfriMarkets-python/issues"
-Changelog     = "https://github.com/Koffi-Fredysessie/AfriMarkets-python/releases"
+Homepage      = "https://github.com/XGEOSOFT-CORPORATION/AfriMarkets-python"
+Documentation = "https://github.com/XGEOSOFT-CORPORATION/AfriMarkets-python#readme"
+Repository    = "https://github.com/XGEOSOFT-CORPORATION/AfriMarkets-python"
+"Bug Tracker" = "https://github.com/XGEOSOFT-CORPORATION/AfriMarkets-python/issues"
+Changelog     = "https://github.com/XGEOSOFT-CORPORATION/AfriMarkets-python/releases"
 
 
 # ==============================================================================

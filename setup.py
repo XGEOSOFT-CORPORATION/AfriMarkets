@@ -86,12 +86,12 @@ setup(
     # ------------------------------------------------------------------
     # URLs
     # ------------------------------------------------------------------
-    url          = "https://github.com/Koffi-Fredysessie/AfriMarkets-python",
+    url          = "https://github.com/XGEOSOFT-CORPORATION/AfriMarkets-python",
     project_urls = {
-        "Homepage"    : "https://github.com/Koffi-Fredysessie/AfriMarkets-python",
-        "Bug Tracker" : "https://github.com/Koffi-Fredysessie/AfriMarkets-python/issues",
-        "Repository"  : "https://github.com/Koffi-Fredysessie/AfriMarkets-python",
-        "Changelog"   : "https://github.com/Koffi-Fredysessie/AfriMarkets-python/releases",
+        "Homepage"    : "https://github.com/XGEOSOFT-CORPORATION/AfriMarkets-python",
+        "Bug Tracker" : "https://github.com/XGEOSOFT-CORPORATION/AfriMarkets-python/issues",
+        "Repository"  : "https://github.com/XGEOSOFT-CORPORATION/AfriMarkets-python",
+        "Changelog"   : "https://github.com/XGEOSOFT-CORPORATION/AfriMarkets-python/releases",
     },
 
     # ------------------------------------------------------------------

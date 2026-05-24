@@ -11,7 +11,7 @@ SETUP_INSTRUCTIONS = """
 
 ## 1. Cloner le repository
 ```bash
-git clone https://github.com/Koffi-Fredysessie/AfriMarkets-python.git
+git clone https://github.com/XGEOSOFT-CORPORATION/AfriMarkets-python.git
 cd AfriMarkets-python
 ```
 

@@ -3,7 +3,7 @@ AfriMarkets is a Python package dedicated to African financial market data analy
 
 <div align="center">
 
-<img src="https://raw.githubusercontent.com/Koffi-Fredysessie/AfriMarkets-python/main/docs/assets/logo.png" width="160px" alt="AfriMarkets logo"/>
+<img src="https://raw.githubusercontent.com/XGEOSOFT-CORPORATION/AfriMarkets-python/main/docs/assets/logo.png" width="160px" alt="AfriMarkets logo"/>
 
 # AfriMarkets — Python
 
@@ -13,7 +13,7 @@ AfriMarkets is a Python package dedicated to African financial market data analy
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Version](https://img.shields.io/badge/version-0.1.0-blue.svg)]()
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)]()
-[![GitHub issues](https://img.shields.io/github/issues/Koffi-Fredysessie/AfriMarkets-python)](https://github.com/Koffi-Fredysessie/AfriMarkets-python/issues)
+[![GitHub issues](https://img.shields.io/github/issues/XGEOSOFT-CORPORATION/AfriMarkets-python)](https://github.com/XGEOSOFT-CORPORATION/AfriMarkets-python/issues)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 **AfriMarkets** is a Python package that provides unified, programmatic access
@@ -70,13 +70,13 @@ pip install afrimarkets
 ### From GitHub *(current)*
 
 ```bash
-pip install git+https://github.com/Koffi-Fredysessie/AfriMarkets-python.git
+pip install git+https://github.com/XGEOSOFT-CORPORATION/AfriMarkets-python.git
 ```
 
 ### Development install
 
 ```bash
-git clone https://github.com/Koffi-Fredysessie/AfriMarkets-python.git
+git clone https://github.com/XGEOSOFT-CORPORATION/AfriMarkets-python.git
 cd AfriMarkets-python
 pip install -e ".[dev]"
 ```
@@ -464,7 +464,7 @@ new indicators, documentation, or ML models.
 
 ```bash
 # 1. Fork and clone
-git clone https://github.com/Koffi-Fredysessie/AfriMarkets-python.git
+git clone https://github.com/XGEOSOFT-CORPORATION/AfriMarkets-python.git
 cd AfriMarkets-python
 
 # 2. Create a virtual environment
@@ -500,7 +500,7 @@ git push origin feature/add-xyz-market
 ## 🐛 Bug Reports & Feature Requests
 
 Found a bug or want a new feature?  
-👉 [Open an issue](https://github.com/Koffi-Fredysessie/AfriMarkets-python/issues)
+👉 [Open an issue](https://github.com/XGEOSOFT-CORPORATION/AfriMarkets-python/issues)
 
 Please include:
 
@@ -515,7 +515,7 @@ Please include:
 
 | Project | Language | Link |
 |---|---|---|
-| AfriMarkets | R | [github.com/Koffi-Fredysessie/AfriMarkets](https://github.com/Koffi-Fredysessie/AfriMarkets) |
+| AfriMarkets | R | [github.com/XGEOSOFT-CORPORATION/AfriMarkets](https://github.com/XGEOSOFT-CORPORATION/AfriMarkets) |
 | AfriMarkets | Python | *this repository* |
 
 ---

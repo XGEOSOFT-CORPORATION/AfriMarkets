@@ -43,7 +43,7 @@ class BRVMAdapter(MarketAdapter):
         try:
             # TODO: Implémenter le scraping des tickers BRVM
             # Placeholder data
-            self.market.list_indexes = ["BRVM10", "BRVM Composite"]
+            self.market.list_indexes = ["BRVM10", "BRVMC"]
             self.market.list_shares = ["SNTS", "SGBCI", "SEMC", "ETIT"]
             
             # Créer les DataFrames d'exemple
