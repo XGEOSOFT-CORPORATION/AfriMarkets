@@ -1,1 +1,0 @@
-"""Legacy NGX data sources"""

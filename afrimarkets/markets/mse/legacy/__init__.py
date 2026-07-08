@@ -1,1 +1,0 @@
-"""Legacy MSE data sources"""

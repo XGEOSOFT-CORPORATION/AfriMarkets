@@ -1,1 +1,0 @@
-"""Legacy GSE data sources"""

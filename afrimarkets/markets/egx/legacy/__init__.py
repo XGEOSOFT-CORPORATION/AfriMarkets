@@ -1,1 +1,0 @@
-"""Legacy EGX data sources"""

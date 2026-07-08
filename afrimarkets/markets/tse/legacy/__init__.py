@@ -1,1 +1,0 @@
-"""Legacy TSE data sources"""
