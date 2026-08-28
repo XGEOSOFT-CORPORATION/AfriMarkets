@@ -224,7 +224,21 @@ sí i àti láti wúlò fún Áfíríkà.
 
 ## Licence et liens | License and links | Licence àti àwọn ìtọ́kasí
 
+
+
+## 👥 Authors
+
+| Name | Role | Contact |
+|---|---|---|
+| **Olabiyi Aurel Géoffroy Odjo** | Creator & maintainer | odjoaurel@gmail.com |
+| **Koffi Frederic Sessie** | Author | koffisessie@gmail.com |
+| **Abdoul Oudouss Diakité** | Author | abdouloudoussdiakite@gmail.com |
+| **Steven P. Sanderson II, MPH** | Author | spsanderson@gmail.com |
+
+---
+
 AfriMarkets est distribué sous licence MIT. Consultez le fichier `LICENSE`.
 
 - Dépôt / Repository: https://github.com/XGEOSOFT-CORPORATION/AfriMarkets-python
 - Issues: https://github.com/XGEOSOFT-CORPORATION/AfriMarkets-python/issues
+
