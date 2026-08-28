@@ -22,7 +22,7 @@ class Market(ABC):
 
     index_table: list = None
     share_table: list = None
-    bond_table: list = 
+    bond_table: list = None
     ticker_table: list = None
 
     def __init_subclass__(cls, **kwargs):

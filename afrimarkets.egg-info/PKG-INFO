@@ -2,792 +2,242 @@ Metadata-Version: 2.4
 Name: afrimarkets
 Version: 0.1.0
 Summary: African financial markets data access and analysis
+Project-URL: Homepage, https://github.com/XGEOSOFT-CORPORATION/AfriMarkets
+Project-URL: Repository, https://github.com/XGEOSOFT-CORPORATION/AfriMarkets
 Requires-Python: >=3.12
 Description-Content-Type: text/markdown
 Requires-Dist: requests>=2.31
 Requires-Dist: beautifulsoup4>=4.12
 Requires-Dist: pandas>=2.2
+Requires-Dist: tabulate>=0.9
 
 # AfriMarkets
 
-**Documentation:** [Francais](#afrimarkets) | [English](#afrimarkets-english) | [Yoruba](#afrimarkets-yoruba)
+**Documentation:** [Français](#français) | [English](#english) | [Yorùbá](#yorùbá)
 
-### Sommaire
+AfriMarkets est un package Python open source qui fournit une interface simple
+pour les marchés financiers africains. Le projet est actuellement en **alpha
+(0.1.0)** et inclut la registry des marchés ainsi que le support initial de la
+BRVM.
 
-- [Objectif du package](#objectif-du-package)
-- [Valeur pour la societe](#valeur-pour-la-societe)
-- [Contribution sociale et economique](#contribution-sociale-et-economique)
-- [Fonctionnalites actuelles](#fonctionnalites-actuelles)
-- [Installation](#installation)
-- [Methodes d'importation](#methodes-dimportation)
-- [Utilisation](#utilisation)
-- [Architecture](#architecture)
-- [Developpement](#developpement)
-- [Feuille de route](#feuille-de-route-indicative)
-- [English documentation](#afrimarkets-english)
-- [Yoruba documentation](#afrimarkets-yoruba)
+Les connecteurs pour récupérer les tickers et les historiques de prix sont
+encore en développement.
 
-AfriMarkets est un package Python open source qui vise a fournir un acces
-unifie aux donnees des marches financiers africains. Il a pour ambition de
-regrouper, dans une meme interface, les informations de marches, les actifs
-financiers, les historiques de prix et les outils d'analyse necessaires aux
-investisseurs, aux entreprises, aux chercheurs et aux developpeurs.
+Le projet veut rendre les marchés africains plus accessibles aux développeurs,
+chercheurs, fintechs et investisseurs. Il peut faciliter la création d'outils
+de suivi, d'analyse et de recherche adaptés aux réalités régionales.
 
-> **Statut : Alpha (0.1.0)**
->
-> L'architecture de base, la registry des marches et le support initial de la
-> BRVM sont en place. Les connecteurs de collecte des tickers et des donnees
-> historiques restent a implementer.
+## Français
 
-## Objectif du package
+### Installation
 
-Les donnees des marches africains sont souvent dispersees entre des sites,
-des formats et des sources heterogenes. AfriMarkets cherche a reduire cette
-friction en proposant :
-
-- une API Python commune pour plusieurs places financieres africaines ;
-- des modeles partages pour les actions, obligations, matieres premieres,
-	devises et indices ;
-- une registry permettant de retrouver un marche par son code ;
-- un socle pour l'acces aux donnees historiques et, a terme, aux donnees en
-	temps reel ;
-- une base exploitable pour l'analyse quantitative, la visualisation,
-	l'optimisation de portefeuille et la prevision.
-
-Le projet est concu pour pouvoir ajouter progressivement des marches tels que
-la BRVM, la NGX, la JSE ou la GSE sans modifier l'interface generale de
-l'utilisateur.
-
-## Valeur pour la societe
-
-AfriMarkets peut apporter une valeur technique et operationnelle a une
-entreprise qui travaille dans la finance, la fintech, la data ou la recherche :
-
-- **Reduction du temps d'integration :** une interface commune limite le
-	developpement de connecteurs specifiques pour chaque place boursiere ;
-- **Industrialisation de la donnee :** les donnees peuvent etre normalisees,
-	testees et reutilisees dans des tableaux de bord, applications ou modeles ;
-- **Aide a la decision :** les historiques et indicateurs peuvent alimenter
-	des analyses de risque, de performance et de diversification ;
-- **Scalabilite regionale :** l'ajout d'une nouvelle place de marche suit la
-	meme architecture au lieu de creer un projet independant ;
-- **Souverainete et capitalisation technique :** l'entreprise dispose d'un
-	socle maitrisable et extensible pour ses usages locaux.
-
-Ces benefices dependent de la disponibilite, de la qualite et des conditions
-d'utilisation des sources de donnees. AfriMarkets ne fournit pas de conseil en
-investissement et ne garantit ni l'exactitude des donnees ni la performance
-d'une strategie.
-
-## Contribution sociale et economique
-
-En facilitant l'acces programme aux informations financieres regionales,
-AfriMarkets peut contribuer a :
-
-- rendre les marches africains plus visibles et plus accessibles aux
-	developpeurs, chercheurs et entrepreneurs locaux ;
-- soutenir la creation de services fintech adaptes aux economies africaines ;
-- encourager la recherche universitaire sur les marches, le risque et le
-	financement des entreprises ;
-- ameliorer la culture financiere grace a des outils d'analyse plus faciles a
-	construire ;
-- favoriser la comparaison des marches et la circulation d'une information
-	structuree entre acteurs economiques.
-
-Il s'agit d'impacts attendus du projet, et non de resultats deja mesures. Leur
-realisation dependra notamment de la couverture des places financieres, de la
-qualite des donnees, de la documentation et de l'adoption par les utilisateurs.
-
-## Fonctionnalites actuelles
-
-- Python 3.9 ou version ulterieure ;
-- modele abstrait `Market` pour decrire un marche ;
-- validation et normalisation des codes de marche et de devise ;
-- registry des marches disponibles ;
-- classe `AfricanMarket` pour les marches du continent ;
-- classe `BRVM` preparee pour la Bourse Regionale des Valeurs Mobilieres ;
-- modeles `Ticker`, `Share`, `Bond`, `Commodity`, `Currency` et `Index` ;
-- dependances prevues pour la manipulation de donnees, le web, la
-	visualisation, les statistiques, l'optimisation de portefeuille et le
-	machine learning.
-
-Les methodes `BRVM.get_tickers()` et `BRVM.get_data()` renvoient actuellement
-`NotImplementedError`. Elles constituent le point d'extension pour les futurs
-connecteurs API, scraping ou bases locales.
-
-## Installation
-
-### Depuis le depot
+Python 3.12 ou une version plus récente est nécessaire.
 
 ```bash
 git clone https://github.com/XGEOSOFT-CORPORATION/AfriMarkets-python.git
 cd AfriMarkets-python
 python -m venv .venv
-source .venv/bin/activate  # Windows : .venv\\Scripts\\activate
-python -m pip install --upgrade pip
+source .venv/bin/activate  # Windows : .venv\Scripts\activate
 python -m pip install -e .
 ```
 
-L'installation editable (`-e`) est pratique pour contribuer au projet. Pour
-une installation standard depuis le dossier du projet :
-
-```bash
-python -m pip install .
-```
-
-### Avec les dependances optionnelles
-
-```bash
-python -m pip install ".[dev]"
-python -m pip install ".[tensorflow]"
-python -m pip install ".[torch]"
-```
-
-Les dependances de base sont declarees dans `pyproject.toml`. Le fichier
-`requirements.txt` permet egalement une installation directe :
-
-```bash
-python -m pip install -r requirements.txt
-```
-
-## Methodes d'importation
-
-### Import recommande des marches
+### Utilisation
 
 ```python
-from afrimarkets.markets import BRVM, Market
-from afrimarkets.markets import available_markets, get_market
-```
-
-### Import direct des composants
-
-```python
-from afrimarkets.markets.market import Market
-from afrimarkets.markets.registry import MarketRegistry
-from afrimarkets.assets import Bond, Commodity, Currency, Index, Share, Ticker
-```
-
-L'import de `afrimarkets.markets` charge la classe `BRVM` afin qu'elle soit
-automatiquement enregistree dans `MarketRegistry`.
-
-## Utilisation
-
-### Consulter les marches disponibles
-
-```python
-from afrimarkets.markets import available_markets, get_market
-
-print(available_markets())
-brvm = get_market("brvm")
-print(brvm)
-print(brvm.code)
-```
-
-Sortie attendue a ce stade :
-
-```text
-['BRVM']
-Bourse Régionale des Valeurs Mobilières (BRVM)
-BRVM
-```
-
-La registry accepte les codes sans tenir compte de la casse. Il est egalement
-possible de recuperer la classe sans l'instancier :
-
-```python
-from afrimarkets.markets import get_market_class
-
-BRVMClass = get_market_class("BRVM")
-market = BRVMClass()
-```
-
-### Utiliser un marche comme extension
-
-Chaque marche concret doit fournir `get_tickers()` et `get_data()` :
-
-```python
-from afrimarkets.markets import BRVM
+from afrimarkets import BRVM
 
 market = BRVM()
-
-# Disponible dans l'interface, mais pas encore implemente pour la BRVM.
-# tickers = market.get_tickers()
-# prices = market.get_data(tickers=["SYMBOL"], start="2024-01-01")
+data = market.get_data(
+	["BOAB"],
+	start="2020-01-01",
+	end="2026-01-31",
+	structure="column",
+)
+print(data)
 ```
 
-### Creer un actif de base
+Lorsque la connexion Internet est stable, `BRVM()` récupère automatiquement les
+tickers du marché à l'initialisation. Pour les récupérer ou les actualiser à
+nouveau dans l'instance locale :
+
+```python
+tickers = market.get_tickers()
+print(market.tickers)
+```
+
+On peut aussi consulter les marchés disponibles :
+
+```python
+from afrimarkets.markets import available_markets, get_market
+
+print(available_markets())       # ['BRVM']
+market = get_market("BRVM")
+print(market.code)               # BRVM
+```
+
+Pour créer un actif :
 
 ```python
 from afrimarkets.assets import Share
 
-share = Share(symbol="SYMBOL", name="Entreprise exemple")
-print(share)
+share = Share(symbol="BOAB", name="Entreprise exemple")
 print(share.info())
 ```
 
-La structure exacte des champs supplementaires depend de chaque modele
-d'actif. Les donnees de marche devront etre raccordees aux connecteurs qui
-seront ajoutes dans les prochaines versions.
+`get_tickers()` actualise les tickers chargés localement par l'instance. Une
+connexion stable est nécessaire pour récupérer les données en ligne.
+AfriMarkets ne fournit pas de conseil en investissement et ne garantit pas
+l'exactitude des données.
 
-## Architecture
+Les contributions sont les bienvenues pour ajouter des marchés, améliorer les
+connecteurs, renforcer les tests et développer les outils d'analyse. Chaque
+contribution aide à étendre la puissance et l'utilité du package en Afrique.
 
-```text
-afrimarkets/
-├── assets/                 # Modeles d'instruments financiers
-├── markets/
-│   ├── market.py           # Contrat abstrait d'un marche
-│   ├── african_market.py   # Base des marches africains
-│   ├── registry.py         # Enregistrement et resolution des marches
-│   └── brvm/               # Implementation initiale de la BRVM
-└── ...
-```
+## English
 
-## Developpement
+AfriMarkets is an open-source Python package providing a simple interface for
+African financial markets. It is currently **alpha (0.1.0)** and includes a
+market registry and initial BRVM support.
 
-Installer les outils de developpement :
+Ticker and historical-price connectors are still under development.
 
-```bash
-python -m pip install -e ".[dev]"
-```
+### Installation
 
-Commandes utiles :
-
-```bash
-pytest
-black .
-flake8 .
-mypy afrimarkets
-```
-
-Les contributions peuvent porter sur les connecteurs de donnees, les tests,
-la documentation, la couverture de nouvelles places financieres et les outils
-d'analyse. Toute source de donnees doit respecter ses conditions d'utilisation
-et ses contraintes de redistribution.
-
-## Feuille de route indicative
-
-1. Implementer le connecteur BRVM pour les tickers et les historiques.
-2. Ajouter des tests unitaires et des tests de contrats pour les marches.
-3. Ajouter d'autres places financieres africaines.
-4. Formaliser les formats de sortie et la gestion des erreurs de collecte.
-5. Enrichir les modules d'analyse, de portefeuille et de prevision.
-6. Publier une documentation API et des exemples reproductibles.
-
-## Licence et liens
-
-AfriMarkets est distribue sous licence MIT. Consultez le fichier `LICENSE`
-pour les conditions completes.
-
-- Depot : https://github.com/XGEOSOFT-CORPORATION/AfriMarkets-python
-- Issues : https://github.com/XGEOSOFT-CORPORATION/AfriMarkets-python/issues
-- Changelog : https://github.com/XGEOSOFT-CORPORATION/AfriMarkets-python/releases
-
-## Auteurs
-
-- Olabiyi Aurel Géoffroy Odjo
-- Koffi Frederic Sessie
-- Abdoul Oudouss Diakité
-- Steven P. Sanderson II
-
----
-
-# AfriMarkets English
-
-**Documentation:** [Francais](#afrimarkets) | [English](#afrimarkets-english) | [Yoruba](#afrimarkets-yoruba)
-
-### Contents
-
-- [Package purpose](#package-purpose)
-- [Business value](#business-value)
-- [Social and economic contribution](#social-and-economic-contribution)
-- [Current features](#current-features)
-- [Installation](#installation-1)
-- [Import methods](#import-methods)
-- [Usage](#usage)
-- [Architecture](#architecture-1)
-- [Development](#development-1)
-- [Roadmap](#indicative-roadmap)
-- [License and links](#license-and-links-1)
-- [Yoruba documentation](#afrimarkets-yoruba)
-
-AfriMarkets is an open-source Python package designed to provide unified
-access to African financial market data. Its goal is to bring market
-information, financial assets, historical prices and analysis tools together
-through a consistent interface for investors, companies, researchers and
-developers.
-
-> **Status: Alpha (0.1.0)**
->
-> The core architecture, market registry and initial BRVM support are in place.
-> Ticker and historical-data connectors are still under development.
-
-## Package purpose
-
-Data from African markets is often distributed across different websites,
-formats and providers. AfriMarkets aims to reduce this friction by providing:
-
-- a common Python API for multiple African exchanges;
-- shared models for shares, bonds, commodities, currencies and indexes;
-- a registry for resolving a market by its code;
-- a foundation for historical and, eventually, real-time data access;
-- a base for quantitative analysis, visualization, portfolio optimization and
-	forecasting.
-
-The architecture is intended to support markets such as BRVM, NGX, JSE and
-GSE without changing the general user interface.
-
-## Business value
-
-AfriMarkets can provide technical and operational value to companies working
-in finance, fintech, data or research:
-
-- **Lower integration time:** one common interface reduces exchange-specific
-	connector work;
-- **Data industrialization:** normalized data can be tested and reused in
-	dashboards, applications and models;
-- **Better decision support:** historical data and indicators can support risk,
-	performance and diversification analysis;
-- **Regional scalability:** a new exchange can follow the existing architecture
-	instead of becoming a separate project;
-- **Technical ownership:** companies can build an extensible data foundation
-	adapted to their local needs.
-
-These benefits depend on data availability, quality and provider terms of use.
-AfriMarkets does not provide investment advice and does not guarantee data
-accuracy or investment performance.
-
-## Social and economic contribution
-
-By making regional financial information easier to access programmatically,
-AfriMarkets may help to:
-
-- make African markets more visible and accessible to local developers,
-	researchers and entrepreneurs;
-- support fintech services adapted to African economies;
-- encourage academic research on markets, risk and business financing;
-- improve financial literacy through easier-to-build analysis tools;
-- facilitate structured information sharing between economic stakeholders.
-
-These are expected project impacts, not measured results. Their achievement
-will depend on market coverage, data quality, documentation and adoption.
-
-## Current features
-
-- Python 3.9 or later;
-- abstract `Market` model for describing a financial market;
-- validation and normalization of market and currency codes;
-- market registry;
-- `AfricanMarket` base class;
-- initial `BRVM` class for the Regional Stock Exchange;
-- `Ticker`, `Share`, `Bond`, `Commodity`, `Currency` and `Index` models;
-- planned dependencies for data processing, web access, visualization,
-	statistics, portfolio optimization and machine learning.
-
-`BRVM.get_tickers()` and `BRVM.get_data()` currently raise
-`NotImplementedError`. They are extension points for future API, scraping or
-local-database connectors.
-
-## Installation
-
-### From the repository
+Python 3.12 or later is required.
 
 ```bash
 git clone https://github.com/XGEOSOFT-CORPORATION/AfriMarkets-python.git
 cd AfriMarkets-python
 python -m venv .venv
-source .venv/bin/activate  # Windows: .venv\\Scripts\\activate
-python -m pip install --upgrade pip
+source .venv/bin/activate  # Windows: .venv\Scripts\activate
 python -m pip install -e .
 ```
 
-Editable installation (`-e`) is recommended for development. For a standard
-installation from the project directory:
-
-```bash
-python -m pip install .
-```
-
-### Optional dependencies
-
-```bash
-python -m pip install ".[dev]"
-python -m pip install ".[tensorflow]"
-python -m pip install ".[torch]"
-```
-
-Base dependencies are declared in `pyproject.toml`. They can also be installed
-directly with:
-
-```bash
-python -m pip install -r requirements.txt
-```
-
-## Import methods
-
-### Recommended market imports
+### Usage
 
 ```python
-from afrimarkets.markets import BRVM, Market
-from afrimarkets.markets import available_markets, get_market
-```
-
-### Direct component imports
-
-```python
-from afrimarkets.markets.market import Market
-from afrimarkets.markets.registry import MarketRegistry
-from afrimarkets.assets import Bond, Commodity, Currency, Index, Share, Ticker
-```
-
-Importing `afrimarkets.markets` loads `BRVM`, which automatically registers it
-in `MarketRegistry`.
-
-## Usage
-
-### List available markets
-
-```python
-from afrimarkets.markets import available_markets, get_market
-
-print(available_markets())
-brvm = get_market("brvm")
-print(brvm)
-print(brvm.code)
-```
-
-Expected output at this stage:
-
-```text
-['BRVM']
-Bourse Régionale des Valeurs Mobilières (BRVM)
-BRVM
-```
-
-Market codes are case-insensitive. A market class can also be retrieved
-without instantiating it:
-
-```python
-from afrimarkets.markets import get_market_class
-
-BRVMClass = get_market_class("BRVM")
-market = BRVMClass()
-```
-
-### Extend a market
-
-Every concrete market must implement `get_tickers()` and `get_data()`:
-
-```python
-from afrimarkets.markets import BRVM
+from afrimarkets import BRVM
 
 market = BRVM()
-
-# Part of the interface, but not implemented for BRVM yet.
-# tickers = market.get_tickers()
-# prices = market.get_data(tickers=["SYMBOL"], start="2024-01-01")
+data = market.get_data(
+	["BOAB"],
+	start="2020-01-01",
+	end="2026-01-31",
+	structure="column",
+)
+print(data)
 ```
 
-### Create a basic asset
+With a stable Internet connection, `BRVM()` automatically retrieves the
+market tickers during initialization. To retrieve and refresh them again in
+the local instance:
+
+```python
+tickers = market.get_tickers()
+print(market.tickers)
+```
+
+Available markets can also be listed:
+
+```python
+from afrimarkets.markets import available_markets, get_market
+
+print(available_markets())       # ['BRVM']
+market = get_market("BRVM")
+print(market.code)               # BRVM
+```
+
+An asset can be created directly:
 
 ```python
 from afrimarkets.assets import Share
 
-share = Share(symbol="SYMBOL", name="Example company")
-print(share)
+share = Share(symbol="BOAB", name="Example company")
 print(share.info())
 ```
 
-The exact additional fields depend on each asset model. Market data will be
-connected through provider connectors added in future releases.
+`get_tickers()` refreshes the tickers loaded locally by the instance. A stable
+connection is required to retrieve online data. AfriMarkets does not provide
+investment advice or guarantee data accuracy.
 
-## Architecture
+Contributors are welcome to add markets, improve connectors, strengthen tests
+and develop analysis tools. Every contribution helps expand the package's
+power and usefulness across Africa.
 
-```text
-afrimarkets/
-├── assets/                 # Financial instrument models
-├── markets/
-│   ├── market.py           # Abstract market contract
-│   ├── african_market.py   # African market base class
-│   ├── registry.py         # Market registration and resolution
-│   └── brvm/               # Initial BRVM implementation
-└── ...
-```
+## Yorùbá
 
-## Development
+AfriMarkets jẹ́ package Python open source tí ó ń pèsè ọ̀nà rọrùn fún lílo data
+ọjà ìṣúná Áfíríkà. Ó wà ní ipò **alpha (0.1.0)**, ó sì ní market registry àti
+ìbẹ̀rẹ̀ support fún BRVM.
 
-Install development tools:
+Àwọn connector fún tickers àti data ìtàn kò tíì parí.
 
-```bash
-python -m pip install -e ".[dev]"
-```
+### Fifi sori ẹrọ
 
-Useful commands:
-
-```bash
-pytest
-black .
-flake8 .
-mypy afrimarkets
-```
-
-Contributions may include data connectors, tests, documentation, new markets
-and analysis tools. Data sources must be used and redistributed according to
-their terms.
-
-## Indicative roadmap
-
-1. Implement the BRVM ticker and historical-data connector.
-2. Add unit tests and market contract tests.
-3. Add more African exchanges.
-4. Formalize output formats and collection error handling.
-5. Expand analysis, portfolio and forecasting modules.
-6. Publish API documentation and reproducible examples.
-
-## License and links
-
-AfriMarkets is distributed under the MIT License. See `LICENSE` for the full
-terms.
-
-- Repository: https://github.com/XGEOSOFT-CORPORATION/AfriMarkets-python
-- Issues: https://github.com/XGEOSOFT-CORPORATION/AfriMarkets-python/issues
-- Changelog: https://github.com/XGEOSOFT-CORPORATION/AfriMarkets-python/releases
-
-## Authors
-
-- Olabiyi Aurel Géoffroy Odjo
-- Koffi Frederic Sessie
-- Abdoul Oudouss Diakité
-- Steven P. Sanderson II
-
----
-
-# AfriMarkets Yoruba
-
-**Àkọsílẹ̀:** [Français](#afrimarkets) | [English](#afrimarkets-english) | [Yorùbá](#afrimarkets-yoruba)
-
-### Àkóónú
-
-- [Àfojúsùn package](#àfojúsùn-package)
-- [Àǹfààní fún ilé-iṣẹ́](#ànfààní-fún-ilé-iṣẹ́)
-- [Ìkópa láwùjọ àti nínú ètò-ọrọ̀](#ìkópa-láwùjọ-ati-ninu-eto-ọrọ̀)
-- [Àwọn ohun tó wà báyìí](#awọn-ohun-tó-wà-báyìí)
-- [Fifi sori ẹrọ](#fifi-sori-ẹrọ)
-- [Àwọn ọ̀nà import](#àwọn-ọ̀nà-import)
-- [Lílò](#lílò)
-- [Ìṣètò package](#ìṣètò-package)
-- [Ìdàgbàsókè](#ìdàgbàsókè)
-- [Ètò ìdàgbàsókè ọjọ́ iwájú](#ètò-ìdàgbàsókè-ọjọ́-iwájú)
-- [Licence àti àwọn ìtọ́kasí](#licence-ati-awọn-itọ́kasí)
-
-AfriMarkets jẹ́ package Python open source tí ó ń pèsè ọ̀nà kan ṣoṣo láti wọlé
-sí data àwọn ọjà ìṣúná ní Áfíríkà. Ó ń ṣọ̀kan ìmọ̀ nípa ọjà, àwọn ohun-ìní
-ìṣúná, iye owó ìtàn àti àwọn irinṣẹ́ ìtúpalẹ̀ fún àwọn olùdókòwò, ilé-iṣẹ́,
-àwọn olùṣèwádìí àti àwọn developer.
-
-> **Ipò: Alpha (0.1.0)**
->
-> Ìṣètò pàtàkì, registry àwọn ọjà àti ìbẹ̀rẹ̀ support fún BRVM wà nílẹ̀.
-> Àwọn connector fún tickers àti data ìtàn kò tíì parí.
-
-## Àfojúsùn package
-
-Data àwọn ọjà Áfíríkà sábà máa ń wà ní àwọn website, format àti orísun
-ọ̀tọ̀ọ̀tọ̀. AfriMarkets fẹ́ dín ìṣòro yìí kù pẹ̀lú:
-
-- API Python kan fún ọ̀pọ̀ exchange Áfíríkà;
-- àwọn model tó jọra fún shares, bonds, commodities, currencies àti indexes;
-- registry tí ó ń jẹ́ kí a rí ọjà pẹ̀lú code rẹ̀;
-- ipilẹ fún data ìtàn àti, ní ọjọ́ iwájú, data ní àkókò gidi;
-- ipilẹ fún quantitative analysis, visualization, portfolio optimization àti
-	forecasting.
-
-Ó ṣeé ṣe láti fi àwọn ọjà bí BRVM, NGX, JSE àti GSE kún un láì yí interface
-gbogbogbo padà.
-
-## Àǹfààní fún ilé-iṣẹ́
-
-AfriMarkets lè ṣe ìrànwọ́ fún ilé-iṣẹ́ tó ń ṣiṣẹ́ ní finance, fintech, data tàbí
-research ní àwọn ọ̀nà wọ̀nyí:
-
-- **Dín àkókò integration kù:** interface kan dín iṣẹ́ connector pàtàkì fún
-	exchange kọ̀ọ̀kan kù;
-- **Ṣètò data dáadáa:** a lè normalize, test àti tún lo data nínú dashboard,
-	application àti model;
-- **Ìrànwọ́ fún ìpinnu:** data ìtàn àti indicators lè ṣe support fún ìtúpalẹ̀
-	ewu, performance àti diversification;
-- **Ìdàgbàsókè agbègbè:** a lè fi exchange tuntun kún architecture kan náà;
-- **Ìṣàkóso imọ̀:** ilé-iṣẹ́ lè ní ipilẹ data tí ó gbooro tí ó bá a nílò mu.
-
-Àǹfààní wọ̀nyí dá lórí bí data ṣe wà, didara rẹ̀ àti àwọn ofin orísun data.
-AfriMarkets kì í ṣe advice fún investment, kò sì ṣe ìdánilójú pé data tàbí
-èrè investment máa péye.
-
-## Ìkópa láwùjọ àti nínú ètò-ọrọ̀
-
-Nípa mímú kí a lè wọlé sí ìmọ̀ ìṣúná agbègbè nípasẹ̀ software, AfriMarkets lè:
-
-- jẹ́ kí àwọn ọjà Áfíríkà hàn síta, kí ó sì rọrùn fún developers, researchers
-	àti entrepreneurs láti lò wọ́n;
-- ṣe support fún fintech tí ó bá àwọn economy Áfíríkà mu;
-- fún research ilé-ẹ̀kọ́ nípa ọjà, ewu àti ìṣúná ilé-iṣẹ́ ní okun;
-- ṣe ìmúgbòòrò ìmọ̀ nípa finance pẹ̀lú irinṣẹ́ ìtúpalẹ̀ tó rọrùn láti kọ́;
-- ràn àwọn alábàáṣiṣẹ́ ètò-ọrọ̀ lọ́wọ́ láti fi data tí a ṣètò wé ara wọn.
-
-Àwọn wọ̀nyí jẹ́ ipa tí a ń retí, kì í ṣe abajade tí a ti wọn tán. Wọ́n yóò dá
-lórí coverage àwọn ọjà, didara data, documentation àti bí àwọn olumulo ṣe gba
-project náà.
-
-## Àwọn ohun tó wà báyìí
-
-- Python 3.9 tàbí tuntun ju bẹ́ẹ̀ lọ;
-- abstract `Market` model fún ṣíṣe àpèjúwe ọjà ìṣúná;
-- validation àti normalization fún market àti currency codes;
-- market registry;
-- `AfricanMarket` base class;
-- `BRVM` class fún Bourse Régionale des Valeurs Mobilières;
-- `Ticker`, `Share`, `Bond`, `Commodity`, `Currency` àti `Index` models.
-
-`BRVM.get_tickers()` àti `BRVM.get_data()` ṣì ń dá `NotImplementedError` padà.
-Wọ́n jẹ́ ibi tí a ó ti so API, scraping tàbí local database connector mọ́ ní
-àwọn version tó ń bọ̀.
-
-## Fifi sori ẹrọ
-
-### Láti repository
+Python 3.12 tàbí tuntun ju bẹ́ẹ̀ lọ ni a nílò.
 
 ```bash
 git clone https://github.com/XGEOSOFT-CORPORATION/AfriMarkets-python.git
 cd AfriMarkets-python
 python -m venv .venv
-source .venv/bin/activate  # Windows: .venv\\Scripts\\activate
-python -m pip install --upgrade pip
+source .venv/bin/activate  # Windows: .venv\Scripts\activate
 python -m pip install -e .
 ```
 
-Fún installation tó bójú mu láti project directory:
-
-```bash
-python -m pip install .
-```
-
-### Àwọn dependency àfikún
-
-```bash
-python -m pip install ".[dev]"
-python -m pip install ".[tensorflow]"
-python -m pip install ".[torch]"
-```
-
-A tún lè fi àwọn dependency inú `requirements.txt` sílẹ̀:
-
-```bash
-python -m pip install -r requirements.txt
-```
-
-## Àwọn ọ̀nà import
-
-### Import tí a ṣe ìmọ̀ràn fún ọjà
+### Lílò
 
 ```python
-from afrimarkets.markets import BRVM, Market
-from afrimarkets.markets import available_markets, get_market
+from afrimarkets import BRVM
+
+market = BRVM()
+data = market.get_data(
+	["BOAB"],
+	start="2020-01-01",
+	end="2026-01-31",
+	structure="column",
+)
+print(data)
 ```
 
-### Import àwọn component ní tààrà
+Nígbà tí ìbáṣepọ̀ Internet bá dúró ṣinṣin, `BRVM()` máa ń gba àwọn ticker ọjà
+wọlé láìsí ìgbésẹ̀ míì nígbà ìbẹ̀rẹ̀. A lè tún gba wọn, kí a sì tún wọn ṣe nínú
+instance local, pẹ̀lú:
 
 ```python
-from afrimarkets.markets.market import Market
-from afrimarkets.markets.registry import MarketRegistry
-from afrimarkets.assets import Bond, Commodity, Currency, Index, Share, Ticker
+tickers = market.get_tickers()
+print(market.tickers)
 ```
 
-Nígbà tí a bá import `afrimarkets.markets`, `BRVM` máa wọlé, ó sì máa forúkọ
-ara rẹ̀ sínú `MarketRegistry`.
-
-## Lílò
-
-### Wo àwọn ọjà tó wà
+A tún lè wo àwọn ọjà tó wà:
 
 ```python
 from afrimarkets.markets import available_markets, get_market
 
-print(available_markets())
-brvm = get_market("brvm")
-print(brvm)
-print(brvm.code)
+print(available_markets())       # ['BRVM']
+market = get_market("BRVM")
+print(market.code)               # BRVM
 ```
 
-Àbájáde tó yẹ ní ipele yìí ni:
-
-```text
-['BRVM']
-Bourse Régionale des Valeurs Mobilières (BRVM)
-BRVM
-```
-
-Market code kì í ṣe case-sensitive. A tún lè gba class náà láì instantiate rẹ̀:
+Láti dá asset sílẹ̀:
 
 ```python
-from afrimarkets.markets import get_market_class
+from afrimarkets.assets import Share
 
-BRVMClass = get_market_class("BRVM")
-market = BRVMClass()
+share = Share(symbol="BOAB", name="Àpẹẹrẹ ilé-iṣẹ́")
+print(share.info())
 ```
 
-## Ìṣètò package
+`get_tickers()` máa ń tún àwọn ticker tí instance náà kó sílẹ̀ ṣe. Internet tó
+duro ṣinṣin ṣe pàtàkì fún gbigba data online. AfriMarkets kì í ṣe ìmọ̀ràn fún
+investment, kò sì ṣe ìdánilójú pé data máa péye.
 
-```text
-afrimarkets/
-├── assets/                 # Models àwọn ohun-ìní ìṣúná
-├── markets/
-│   ├── market.py           # Àdéhùn abstract fún ọjà
-│   ├── african_market.py   # Base class àwọn ọjà Áfíríkà
-│   ├── registry.py         # Registration àti resolution àwọn ọjà
-│   └── brvm/               # Ìbẹ̀rẹ̀ implementation BRVM
-└── ...
-```
+Àwọn contributor káàbọ̀ láti fi ọjà tuntun, connector, tests àti irinṣẹ́
+ìtúpalẹ̀ kún un. Gbogbo contribution máa ń ran package náà lọ́wọ́ láti lágbára
+sí i àti láti wúlò fún Áfíríkà.
 
-## Ìdàgbàsókè
+## Licence et liens | License and links | Licence àti àwọn ìtọ́kasí
 
-Fi àwọn irinṣẹ́ development sílẹ̀:
+AfriMarkets est distribué sous licence MIT. Consultez le fichier `LICENSE`.
 
-```bash
-python -m pip install -e ".[dev]"
-```
-
-Àwọn command pàtàkì ni:
-
-```bash
-pytest
-black .
-flake8 .
-mypy afrimarkets
-```
-
-Àwọn contribution lè jẹ́ connector data, tests, documentation, àwọn ọjà tuntun
-tàbí irinṣẹ́ ìtúpalẹ̀. A gbọ́dọ̀ tẹ̀lé àwọn ofin lilo àti redistribution ti orísun
-data kọ̀ọ̀kan.
-
-## Ètò ìdàgbàsókè ọjọ́ iwájú
-
-1. Ṣe implementation connector BRVM fún tickers àti data ìtàn.
-2. Fi unit tests àti market contract tests kún un.
-3. Fi exchange Áfíríkà míì kún un.
-4. Ṣètò output formats àti ìṣàkóso errors nígbà collecte.
-5. Gẹ̀rẹ̀ analysis, portfolio àti forecasting modules.
-6. Ṣàtẹ̀jáde API documentation àti examples tí a lè tún ṣe.
-
-## Licence àti àwọn ìtọ́kasí
-
-AfriMarkets wà lábẹ́ MIT License. Wo `LICENSE` fún àwọn ofin tó pé.
-
-- Repository: https://github.com/XGEOSOFT-CORPORATION/AfriMarkets-python
+- Dépôt / Repository: https://github.com/XGEOSOFT-CORPORATION/AfriMarkets-python
 - Issues: https://github.com/XGEOSOFT-CORPORATION/AfriMarkets-python/issues
-- Changelog: https://github.com/XGEOSOFT-CORPORATION/AfriMarkets-python/releases
-
-## Àwọn onkọ̀wé
-
-- Olabiyi Aurel Géoffroy Odjo
-- Koffi Frederic Sessie
-- Abdoul Oudouss Diakité
-- Steven P. Sanderson II

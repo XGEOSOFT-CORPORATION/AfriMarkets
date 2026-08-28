@@ -1,7 +1,5 @@
 README.md
 pyproject.toml
-setup.cfg
-setup.py
 afrimarkets/__init__.py
 afrimarkets.egg-info/PKG-INFO
 afrimarkets.egg-info/SOURCES.txt
@@ -15,6 +13,8 @@ afrimarkets/assets/currency.py
 afrimarkets/assets/index.py
 afrimarkets/assets/share.py
 afrimarkets/assets/ticker.py
+afrimarkets/local_tools/__init__.py
+afrimarkets/local_tools/common.py
 afrimarkets/markets/__init__.py
 afrimarkets/markets/african_market.py
 afrimarkets/markets/market.py

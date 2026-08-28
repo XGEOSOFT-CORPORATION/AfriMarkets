@@ -35,8 +35,7 @@ class BRVM(AfricanMarket):
     def get_tickers(self, *args, **kwargs):
         """
         Return BRVM listed securities.
-
-        This method contains BRVM-specific logic.
+        No parameters are required for this method.
         """
         # tick_data = assets
         tick_data = self.__get_tickers__()
@@ -53,19 +52,29 @@ class BRVM(AfricanMarket):
 
         return self
 
+
+
     def get_data(
         self,
         tickers: list,
         start: str,
         end: str,
         freq: list = ["daily", "weekly", "monthly", "quarterly", "yearly"],
-        structure: list=["row", "column"],
-        format: list=["dataframe", "list"],
+        structure: str="column",
+        format: str="dataframe",
     ):
         """
         Return historical BRVM data.
 
-        This method contains BRVM-specific logic.
+        Parameters:
+            tickers (list): List of tickers to retrieve data for.
+            start (str): Start date in 'YYYY-MM-DD' format.
+            end (str): End date in 'YYYY-MM-DD' format.
+            freq (list): Frequency of data. Options: "daily", "weekly", "monthly", "quarterly", "yearly".
+            structure (str): Structure of the returned data. Options: "row" or "column".
+            format (str): Format of the returned data. Options: "dataframe" or "list".
+        Returns:
+            pd.DataFrame or list: Historical data in the specified format and structure.
         """
 
         dfreq = {
@@ -78,14 +87,22 @@ class BRVM(AfricanMarket):
 
         data_list = self.__get_data__(tickers, start=start, end=end, freq=dfreq[freq[0]])
 
-        if structure[0]:
-            data_list = datalist2structure(data_list, structure=structure[0], date_field="Date")
-
-        if format[0] == "dataframe":
-            return pd.DataFrame(data_list)
+        if structure in ["row", "column"]:
+            data_list = datalist2structure(data_list, structure=structure, date_field="Date")
         else:
-            return data_list
+            raise ValueError(
+                f"Invalid structure '{structure}'. Must be 'row' or 'column'."
+            )
 
+        if format == "dataframe":
+            return pd.DataFrame(data_list)
+        elif format == "list":
+            return data_list
+        else:
+            raise ValueError(
+                f"Invalid format '{format[0]}'. Must be 'dataframe' or 'list'."
+            )
+        
 
     def __get_tickers__(self):
 
@@ -149,7 +166,7 @@ class BRVM(AfricanMarket):
             # process
 
             if tick:
-
+                
                 headers = {
                     'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:153.0) Gecko/20100101 Firefox/153.0',
                     'Accept': '*/*',
@@ -182,7 +199,7 @@ class BRVM(AfricanMarket):
                     response = requests.post('https://www.sikafinance.com/api/general/GetHistos', headers=headers, json=json_data)
 
                     if response.status_code != 200:
-                        print(f"Failed to retrieve data for {symb}. Status code: {response.status_code}")
+                        # print(f"Failed to retrieve data for {symb} from {d1} to {d2}. Status code: {response.status_code}")
                         continue
 
                     data = response.json()
@@ -195,6 +212,7 @@ class BRVM(AfricanMarket):
                     data_list.extend(data_interval)
                 else:
                     print(f"No data found for {symb} in the specified date range.")
+                    continue
 
                 data_list = list({tuple(row.items()): row for row in data_list}.values())  # Remove duplicates
                 data_list = sorted(data_list, key=lambda x: (x["Symbol"], x["Date"]))

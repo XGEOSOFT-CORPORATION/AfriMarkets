@@ -1,5 +1,6 @@
-from typing import Type, Dict
+from typing import Dict, Type
 from inspect import isabstract
+from tabulate import tabulate
 
 
 class MarketRegistry:
@@ -11,6 +12,9 @@ class MarketRegistry:
 
     @classmethod
     def register(cls, market_class):
+        """
+        Register a concrete market class.
+        """
 
         if isabstract(market_class):
             return
@@ -20,8 +24,9 @@ class MarketRegistry:
         if not code:
             return
 
-        cls._markets[code] = market_class
+        code = code.strip().upper()
 
+        cls._markets[code] = market_class
 
     @classmethod
     def get(cls, code: str):
@@ -51,7 +56,8 @@ class MarketRegistry:
 
         if code not in cls._markets:
             raise KeyError(
-                f"Unknown market: '{code}'."
+                f"Unknown market: '{code}'. "
+                f"Available markets: {cls.codes()}"
             )
 
         return cls._markets[code]
@@ -72,6 +78,42 @@ class MarketRegistry:
 
         return cls._markets.copy()
 
+
+    @classmethod
+    def show(cls):
+
+        rows = []
+
+        for code, market_class in cls._markets.items():
+
+            market = market_class()
+
+            rows.append([
+                code,
+                market.name,
+                market.country,
+                market.currency,
+                market.description
+            ])
+
+        rows.sort(key=lambda x: x[0])
+
+        print(
+            tabulate(
+                rows,
+                headers=[
+                    "Code",
+                    "Name",
+                    "Country",
+                    "Currency",
+                    "Description"
+                ],
+                tablefmt="rounded_outline"
+            )
+        )
+
+        return rows
+
     @classmethod
     def clear(cls) -> None:
         """
@@ -81,6 +123,8 @@ class MarketRegistry:
         """
 
         cls._markets.clear()
+
+
 
 
 def get_market(code: str):
@@ -105,3 +149,4 @@ def available_markets() -> list[str]:
     """
 
     return MarketRegistry.codes()
+

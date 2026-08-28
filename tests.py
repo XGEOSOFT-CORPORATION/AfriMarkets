@@ -1,4 +1,6 @@
-from afrimarkets import brvm
+from afrimarkets import BRVM
+
+tick = BRVM.get_tickers("bicc")
 
 
 
