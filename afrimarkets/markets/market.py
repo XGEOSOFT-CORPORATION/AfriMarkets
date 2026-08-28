@@ -18,10 +18,12 @@ class Market(ABC):
     indexes : list = None
     shares: list = None
     bonds: list = None
+    tickers: list = None
 
     index_table: list = None
     share_table: list = None
-    bond_table: list = None
+    bond_table: list = 
+    ticker_table: list = None
 
     def __init_subclass__(cls, **kwargs):
         """
