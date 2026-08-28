@@ -466,10 +466,10 @@ See [`LICENSE`](LICENSE) for more information.
 # 🔗 Links
 
 **Repository:**
-https://github.com/XGEOSOFT-CORPORATION/AfriMarkets-python
+https://github.com/XGEOSOFT-CORPORATION/AfriMarkets
 
 **Issues:**
-https://github.com/XGEOSOFT-CORPORATION/AfriMarkets-python/issues
+https://github.com/XGEOSOFT-CORPORATION/AfriMarkets/issues
 
 ---
 
